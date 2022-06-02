@@ -1,0 +1,22 @@
+﻿.navbar{
+    color: #fff;
+    text-decoration: none;
+}
+
+.header{
+    display:flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #f8710b;
+    color: #fff;
+    font-family: 'Lucida Sans Unicode';
+}
+.header__section{
+    display: flex;
+    align-items: center;
+}
+.header__item{
+    padding: 10px 15px;
+    font-size: 20px;
+    margin-left: 5px;
+}

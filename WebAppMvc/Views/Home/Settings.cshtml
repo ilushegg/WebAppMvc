@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WebAppMvc.Models.Person>
+@{
+    ViewData["Title"] = "Настройки";
+}
+
+@using System.Text
+
+@{
+    string email = "";
+    bool send = false;
+    string time = "";
+    if(File.Exists("Email")){
+        using (FileStream fstream = File.OpenRead("Email"))
+        {
+            byte[] buffer = new byte[fstream.Length];
+            await fstream.ReadAsync(buffer, 0, buffer.Length);
+            string str = Encoding.Default.GetString(buffer);
+            string[] temp = str.Split("\t");
+            email = temp[0];
+            if(temp[1] == "on"){
+                send = true;
+            }
+            time = temp[2];
+
+        }
+    }
+}
+
+<div class="settings">
+<h2>Настройки</h2>
+<form class="settings_form" asp-action="Settings" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <p>
+    <label>Ваш Email</label>
+    <input name="email" type="email" class="form-control" value="@email" />
+    </p>
+    @if (send)
+    {
+        <p>
+        <label for="send">У Вас включена рассылка сообщений о днях рождениях</label>
+        <label for="sendfalse"><input name="sendfalse" type="checkbox" class="form-control"/>Выключить рассылку</label>
+        </p>
+    }
+    else
+    {
+        <p>
+            <label for="sendtrue"><input name="sendtrue" type="checkbox" class="form-control"/>Включить рассылку</label>
+        <label for="send">У Вас выключена рассылка сообщений о днях рождениях</label>
+        
+        </p>
+    }
+    <p>
+    <label>Время отправления</label>
+    <input name="time" type="time" class="form-control" value="@time" />
+    </p>
+    
+<input class="button" type="submit" value="Отправить" />
+</form>
+</div>

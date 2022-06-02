@@ -1,0 +1,26 @@
+﻿@model WebAppMvc.Models.Person
+@{
+    ViewData["Title"] = "Добавить друга";
+} 
+<h2 class="title">Добавление</h2>
+<form asp-action="create" asp-controller="home" method="post" enctype="multipart/form-data">
+    <p>
+        <label>Имя</label>
+        <input name="Name" class="form-control" />
+    </p>
+    
+    <p>
+        <label>День рождения</label>
+        <input name="Birthday" type="date" class="form-control" />
+    </p>
+    
+    <p>
+        <label>Фотография</label>
+        <input  name="Image" type="file" class="form-control" />
+    </p>
+        
+    
+    <p>
+        <input class="button" type="submit" value="Отправить" />
+    </p>
+</form> 

@@ -1,0 +1,31 @@
+﻿@model WebAppMvc.Models.Person
+@{
+    ViewData["Title"] = "Редактировать";
+}
+
+ 
+<h2 class="title">Редактирование</h2>
+<form asp-action="edit" asp-controller="home" asp-route-id="@Model.Id" enctype="multipart/form-data">
+    <p>
+        <label>Имя</label>
+        <input  name="Name" class="form-control" asp-for="Name" />
+    </p>
+   
+    
+                
+            
+          
+    <p>
+        <label>День рождения</label>
+        <input  name="Birthday" type="date" class="form-control" asp-for="Birthday" />
+    </p>
+    
+    <p>
+        
+    </p>
+
+    <a asp-action="EditImage" asp-controller="Home" asp-route-id="@Model.Id">Изменить фотографию</a>
+    <p>
+        <input class="button" type="submit" value="Отправить" />
+    </p>
+</form> 
