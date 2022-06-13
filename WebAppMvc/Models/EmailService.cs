@@ -73,7 +73,7 @@ namespace WebAppMvc.Models
         {
             var emailMessage = new MimeMessage();
 
-            emailMessage.From.Add(new MailboxAddress("Поздравь друга!", "congratulationapp@gmail.com"));
+            emailMessage.From.Add(new MailboxAddress("Поздравь друга!", "marnopolskiyi@mail.ru"));
             emailMessage.To.Add(new MailboxAddress("", email));
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
@@ -83,8 +83,8 @@ namespace WebAppMvc.Models
 
             using (var client = new SmtpClient())
             {
-                await client.ConnectAsync("smtp.gmail.com", 587, false);
-                await client.AuthenticateAsync("congratulationapp@gmail.com", "bWPCudvu");
+                await client.ConnectAsync("smtp.mail.ru", 465, true);
+                await client.AuthenticateAsync("marnopolskiyi@mail.ru", "xMtm9AeLwDppvHBZk2xw");
                 await client.SendAsync(emailMessage);
 
                 await client.DisconnectAsync(true);
@@ -93,50 +93,5 @@ namespace WebAppMvc.Models
         }
         public void Dispose()
         { }
-        /*static Timer timer;
-        long interval = 30000; //30 секунд
-        static object synclock = new object();
-        static bool sent = false;
-        public string email { get; set; }
-
         
-
-        public void Init(Task task)
-        {
-            timer = new Timer(new TimerCallback(SendEmailAsync), null, 0, interval);
-        }
-
-        public Task SendEmailAsync(object obj)
-        {
-            
-                DateTime dd = DateTime.Now;
-                if (dd.Hour == 1 && dd.Minute == 30 && sent == false)
-                {
-                    var emailMessage = new MimeMessage();
-
-                    emailMessage.From.Add(new MailboxAddress("Не забудьте поздравить", "congratulationapp@gmail.com"));
-                    emailMessage.To.Add(new MailboxAddress("", email));
-                    emailMessage.Subject = subject;
-                    emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
-                    {
-                        Text = message
-                    };
-
-                    using (var client = new SmtpClient())
-                    {
-                        client.ConnectAsync("smtp.gmail.com", 587, false);
-                        client.AuthenticateAsync("congratulationapp@gmail.com", "bWPCudvu");
-                        client.SendAsync(emailMessage);
-
-                        client.DisconnectAsync(true);
-                    }
-                }
-                else if (dd.Hour != 1 || dd.Minute != 30)
-                {
-                    return Task.CompletedTask;
-                }
-            
-        }*/
-    }
-}
 
